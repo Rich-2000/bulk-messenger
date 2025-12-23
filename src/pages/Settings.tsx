@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import {
   User,
-  Key,
   Bell,
   Moon,
   Sun,

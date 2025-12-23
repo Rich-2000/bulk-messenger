@@ -60,7 +60,7 @@ const Contacts: React.FC = () => {
       console.log('Contact created:', response);
       return response;
     },
-    onSuccess: async (response) => {
+    onSuccess: async () => {
       toast.success('Contact created successfully!');
       
       // Force immediate refetch with await

@@ -83,7 +83,7 @@ const Messages: React.FC = () => {
       console.log('Message sent response:', response);
       return response;
     },
-    onSuccess: async (response) => {
+    onSuccess: async () => {
       toast.success('Message sent successfully!');
       await queryClient.invalidateQueries({ queryKey: ['messages'] });
       await queryClient.refetchQueries({ queryKey: ['messages'], type: 'active' });
