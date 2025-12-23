@@ -31,7 +31,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode, onSwitchMode }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Use separate forms for login and register
   const registerForm = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
   });
@@ -60,104 +59,104 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode, onSwitchMode }) => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:5000/api/auth/google';
+    window.location.href = 'https://bulk-messenger-backend.onrender.com/api/auth/google';
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="text-center mb-8">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-primary-600 flex items-center justify-center">
-          <Mail className="text-white" size={32} />
+    <div className="w-full max-w-sm mx-auto px-4">
+      <div className="text-center mb-6">
+        <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary-600 flex items-center justify-center">
+          <Mail className="text-white" size={24} />
         </div>
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          {mode === 'login' ? 'Welcome Back' : 'Create Account'}
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">
+          {mode === 'login' ? 'Welcome back' : 'Create your account'}
         </h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           {mode === 'login'
-            ? 'Enter your credentials to access your account'
-            : 'Sign up to start sending bulk messages'}
+            ? 'Sign in to continue'
+            : 'Get started with BulkMessenger'}
         </p>
       </div>
 
-      <div className="card animate-slide-up">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
         {mode === 'register' ? (
-          <form onSubmit={registerForm.handleSubmit(onSubmitRegister)} className="space-y-6">
+          <form onSubmit={registerForm.handleSubmit(onSubmitRegister)} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Full Name
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   {...registerForm.register('name')}
-                  className="input-field pl-10"
+                  className="w-full pl-10 pr-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   placeholder="John Doe"
                 />
               </div>
               {registerForm.formState.errors.name && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-xs text-red-600">
                   {registerForm.formState.errors.name.message}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email Address
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   {...registerForm.register('email')}
                   type="email"
-                  className="input-field pl-10"
-                  placeholder="john@example.com"
+                  className="w-full pl-10 pr-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  placeholder="name@company.com"
                 />
               </div>
               {registerForm.formState.errors.email && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-xs text-red-600">
                   {registerForm.formState.errors.email.message}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   {...registerForm.register('password')}
                   type={showPassword ? 'text' : 'password'}
-                  className="input-field pl-10 pr-10"
+                  className="w-full pl-10 pr-10 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
               {registerForm.formState.errors.password && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-xs text-red-600">
                   {registerForm.formState.errors.password.message}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Phone Number (Optional)
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Phone Number <span className="text-gray-400">(Optional)</span>
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   {...registerForm.register('phoneNumber')}
-                  className="input-field pl-10"
-                  placeholder="+1234567890"
+                  className="w-full pl-10 pr-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  placeholder="+1 (555) 000-0000"
                 />
               </div>
             </div>
@@ -165,62 +164,62 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode, onSwitchMode }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn-primary w-full py-3 text-base font-medium"
+              className="w-full py-2.5 px-4 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
                   Creating account...
                 </div>
               ) : (
-                'Create Account'
+                'Continue'
               )}
             </button>
           </form>
         ) : (
-          <form onSubmit={loginForm.handleSubmit(onSubmitLogin)} className="space-y-6">
+          <form onSubmit={loginForm.handleSubmit(onSubmitLogin)} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email Address
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   {...loginForm.register('email')}
                   type="email"
-                  className="input-field pl-10"
-                  placeholder="john@example.com"
+                  className="w-full pl-10 pr-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                  placeholder="name@company.com"
                 />
               </div>
               {loginForm.formState.errors.email && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-xs text-red-600">
                   {loginForm.formState.errors.email.message}
                 </p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   {...loginForm.register('password')}
                   type={showPassword ? 'text' : 'password'}
-                  className="input-field pl-10 pr-10"
+                  className="w-full pl-10 pr-10 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
               {loginForm.formState.errors.password && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-xs text-red-600">
                   {loginForm.formState.errors.password.message}
                 </p>
               )}
@@ -229,35 +228,35 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode, onSwitchMode }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn-primary w-full py-3 text-base font-medium"
+              className="w-full py-2.5 px-4 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
                   Signing in...
                 </div>
               ) : (
-                'Sign In'
+                'Continue'
               )}
             </button>
           </form>
         )}
 
-        <div className="mt-6">
+        <div className="mt-5">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+              <div className="w-full border-t border-gray-200 dark:border-gray-700" />
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">Or continue with</span>
+            <div className="relative flex justify-center text-xs">
+              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">OR</span>
             </div>
           </div>
 
           <button
             onClick={handleGoogleLogin}
-            className="mt-6 w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            className="mt-4 w-full flex items-center justify-center gap-2.5 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm font-medium text-gray-700 dark:text-gray-300"
           >
-            <svg className="w-5 h-5" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path
                 fill="#4285F4"
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -275,18 +274,16 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode, onSwitchMode }) => {
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            <span className="font-medium text-gray-700 dark:text-gray-300">
-              Continue with Google
-            </span>
+            <span>Continue with Google</span>
           </button>
         </div>
 
-        <div className="mt-6 text-center">
-          <p className="text-gray-600 dark:text-gray-400">
+        <div className="mt-5 text-center">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
             {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}
             <button
               onClick={onSwitchMode}
-              className="ml-1 font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400"
+              className="ml-1 font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors"
             >
               {mode === 'login' ? 'Sign up' : 'Sign in'}
             </button>
@@ -294,8 +291,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode, onSwitchMode }) => {
         </div>
       </div>
 
-      <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-        <p>By continuing, you agree to our Terms of Service and Privacy Policy</p>
+      <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-400">
+        <p>By continuing, you agree to our <button className="underline hover:text-gray-700 dark:hover:text-gray-300">Terms</button> and <button className="underline hover:text-gray-700 dark:hover:text-gray-300">Privacy Policy</button></p>
       </div>
     </div>
   );
